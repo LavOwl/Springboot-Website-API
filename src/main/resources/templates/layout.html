@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Default Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/reusable.css}">
+</head>
+<body>
+    <nav>
+        <ul class="navegationBar">
+            <li th:classappend="${httpServletRequest.requestURI == '/' ? 'activeTab' : ''}">
+                <a th:href="@{/}">Inicio</a>
+            </li>
+            <li th:classappend="${(httpServletRequest.requestURI == '/turnos' || httpServletRequest.requestURI == '/turnosoffline') ? 'activeTab' : ''}">
+                <a th:href="@{/turnos}">Mis turnos</a>
+            </li>
+            <li th:classappend="${httpServletRequest.requestURI == '/solicitudes' ? 'activeTab' : ''}">
+                <a th:href="@{/solicitudes}">Solicitudes</a>
+            </li>
+            <li th:classappend="${httpServletRequest.requestURI == '/publicaciones' ? 'activeTab' : ''}">
+                <a th:href="@{/publicaciones}">Mis publicaciones</a>
+            </li>
+        </ul>
+    </nav>
+    <main layout:fragment="content">
+
+    </main>
+</body>
+</html>

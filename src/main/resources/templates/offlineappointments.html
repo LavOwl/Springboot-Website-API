@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{css/appointments.css}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <title>Turnos | Tattoo</title>
+</head>
+<body>
+    <main layout:fragment="content">
+        <div class="calendarWrapper">
+            <div id="calendar"></div>
+            
+            <a class="google-connect" href="https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:8080/login/oauth2/code/google&response_type=code&client_id=400495094891-lq34jct6q69l7c0a0rn14o9aq9310rmo.apps.googleusercontent.com&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar.readonly&access_type=offline">
+                <img src="https://www.google.com/favicon.ico" alt="Google Icon" />
+                Conectar a Google Calendar
+            </a>
+        </div>
+        </div>
+        
+        <script th:inline="javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                const calendarEl = document.getElementById('calendar');
+                
+                const calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'timeGridWeek',
+                    height: 'auto',
+                    slotDuration: '01:00:00',
+                    allDaySlot: false,
+                    header: false,
+                    headerToolbar: { left: '', center: '', right: '' },
+                });
+                
+                calendar.render();
+            });
+        </script>
+    </main>
+</body>
+</html>

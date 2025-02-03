@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css?family=Google+Sans&display=swap');
+
+.calendarWrapper{
+    display: flex;
+    width: 80%;
+    margin-left: 10%;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Google Sans', sans-serif;
+}
+
+#calendar{
+    height: 400px;
+    overflow-y:auto;
+    background-color: #131314;
+    color: aliceblue;
+}
+
+.fc-timegrid-slot-label-cushion {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.fc-header-toolbar, .fc-toolbar, .fc-toolbar-ltr{
+    display: none !important;
+}
+
+#calendar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background:transparent;
+}
+
+
+#calendar::-webkit-scrollbar-thumb {
+    background-color: #5E5E5E;
+    border-radius: 8px;
+    border: none;
+    box-shadow: none;
+    min-height: 40px;
+    
+}
+
+#calendar::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.fc-timegrid-slot {
+    border: 1px solid #333537 !important;
+}
+
+.fc-timegrid-col {
+    border-right: 1px solid #333537 !important;
+}
+
+
+#calendar thead{
+    background-color: #131314 !important;
+}
+
+.fc-col-header-cell {
+    border: 1px solid #333537 !important;  /* Removes the border around each day header */
+}
+
+
+.fc-header {
+    border-bottom: 1px solid #333537 !important; /* Removes the bottom border of the header row */
+}
+
+
+.fc-event-title-container{
+    border: none !important;
+}
+
+.fc-event, .fc-event-dot, .fc-event-time {
+
+    box-shadow: none !important;
+}
+
+.google-connect {
+    display: flex;
+    align-items: center;
+    width: 15rem;
+    gap: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #555;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    margin: 1rem;
+}
+
+.google-connect img {
+    width: 20px;
+    height: 20px;
+}
+
+.google-connect:hover {
+    background: #f8f9fa;
+    border-color: #ccc;
+}
+
+.center-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

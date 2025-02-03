@@ -1,0 +1,36 @@
+.navegationBar{
+    padding: 4vh 0;
+    width: 100%;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1.5rem;
+    background-color: #131314;
+}
+
+body, ul {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.navegationBar li a:hover{
+    background-color: #d6ccc2;
+    color: #131314;
+}
+
+.navegationBar li a{
+    text-decoration: none;
+    color: aliceblue;
+    border-radius: 15px;
+    padding: 5px 15px;
+}
+
+.navegationBar >  .activeTab a{
+    background-color: #343a40;
+}
+
+.navegationBar > .activeTab a{
+    color: white;
+}

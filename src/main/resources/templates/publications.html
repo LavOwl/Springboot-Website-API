@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Inicio | Tattoos</title>
+    <link rel="stylesheet" th:href="@{/css/publications.css}">
+    <link rel="stylesheet" th:href="@{/css/card.css}">
+</head>
+<body>
+    <main layout:fragment="content">
+        <h1>Publicaciones</h1>
+
+        <ul class="list">
+            <li class="tattooListElement" th:each="image : ${images}">
+                <div th:replace="shared :: card(${image})"></div>
+            </li>
+        </ul>
+
+        
+        <form class="uploadForm" th:action="@{/subirpublicacion}" method="post" enctype="multipart/form-data">
+            <div class="texts">
+                <h2>Publicar nuevo tatuaje</h2>
+
+                <label for="title">Título</label>
+                <input id="title" type="text">
+
+                <label for="description">Descripción</label>
+                <textarea oninput="autoResize(this)" id="description" rows="1"></textarea>
+
+                <label for="dropdown">Categoría</label>
+                <select id="dropdown" class="custom-dropdown">
+                    <option value="1">Diseño</option>
+                    <option value="2">Tatuaje</option>
+                    <option value="3">Tatuaje Curado</option>
+                </select>
+            </div>
+
+            <input id="uploadInput" class="uploadInput" type="file" name="image" accept="image/*" required hidden>
+            <div id="uploadLabel" class="uploadLabel">
+                
+                    
+                    <div id="uploadData" class="uploadData">
+                        <img class="uploadIcon" th:src="@{/icons/Upload_Icon.png}">
+                        <p>Arrastrar aquí, o <label for="uploadInput">explorar archivos.</label></p>
+                    </div>
+                
+            </div>
+            <div class="send-wrapper">
+                <button class="uploadButton" type="submit">Subir ↑</button>
+            </div>
+        </form>
+
+
+        <script th:src="@{/js/dragndropmenu.js}"></script>
+        <script>
+            function autoResize(textarea) {
+              textarea.style.height = 'auto';
+              textarea.style.height = textarea.scrollHeight + 'px';
+            }
+            document.addEventListener("DOMContentLoaded", function () {
+                document.querySelectorAll("textarea").forEach(textarea => autoResize(textarea));
+            });
+        </script>
+    </main>
+</body>
+</html>
+

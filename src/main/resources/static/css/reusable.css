@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap');
+html{
+    font-family: 'Work Sans', sans-serif;
+    background-image: url("/images/Inkbackground.png");
+    background-size: cover;
+}
+
