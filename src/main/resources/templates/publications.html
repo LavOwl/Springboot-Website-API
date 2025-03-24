@@ -21,13 +21,13 @@
                 <h2>Publicar nuevo tatuaje</h2>
 
                 <label for="title">Título</label>
-                <input id="title" type="text">
+                <input name="title" id="title" type="text">
 
                 <label for="description">Descripción</label>
-                <textarea oninput="autoResize(this)" id="description" rows="1"></textarea>
+                <textarea name="description" oninput="autoResize(this)" id="description" rows="1"></textarea>
 
                 <label for="dropdown">Categoría</label>
-                <select id="dropdown" class="custom-dropdown">
+                <select name="type" id="dropdown" class="custom-dropdown">
                     <option value="1">Diseño</option>
                     <option value="2">Tatuaje</option>
                     <option value="3">Tatuaje Curado</option>
@@ -60,6 +60,8 @@
                 document.querySelectorAll("textarea").forEach(textarea => autoResize(textarea));
             });
         </script>
+
+        
     </main>
 </body>
 </html>

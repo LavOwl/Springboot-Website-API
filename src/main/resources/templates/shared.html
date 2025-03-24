@@ -7,8 +7,10 @@
 </head>
 <body>
     <div th:fragment="card(image)" class="card">
-        <img class="tattooImg" th:src="@{'api/petitions/' + ${image.getTattooImageId()}}" alt="Tattoo Image" style="max-width: 300px;">
-        <p th:text="${image.getDescription()}"></p>
+        <img class="tattooImg" th:src="@{'api/petitions/' + ${image.getTattooImageId()}}" alt="Tattoo Image">
+        <div class="textcontainer">
+            <p th:text="${image.getDescription()}"></p>
+        </iv>
     </div>
 </body>
 </html>

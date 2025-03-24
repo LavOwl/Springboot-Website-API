@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <link rel="stylesheet" th:href="@{/css/aboutme.css}">
+    <title>Inicio | Tattoos</title>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+    <main layout:fragment="content">
+        <header>
+            <input id="uploadInput" class="uploadInput" type="file" name="image" accept="image/*" required hidden>
+            <div id="uploadLabel" class="uploadLabel">
+                
+                <div id="uploadData" class="uploadData">
+                    <img class="uploadIcon" th:src="@{/icons/Upload_Icon.png}">
+                    <p>Arrastrar aquí, o <label for="uploadInput">explorar archivos.</label></p>
+                </div>
+                
+            </div>
+            <div class="data">
+                <input name="name" id="name" type="text" placeholder="Nombre"> •
+                <input name="age" id="age" type="text" placeholder="Edad"> •
+                <input name="pronouns" id="pronouns" type="text" placeholder="Pronombres">
+            </div>
+
+        </header>
+        <section>
+            <label for="description">Descripción</label>
+            <textarea name="description" oninput="autoResize(this)" id="description" rows="1"></textarea>
+        </section>
+
+        <div class="send-wrapper">
+            <button class="uploadButton" type="submit">Guardar Cambios</button>
+        </div>
+
+        <div id="darkBackground" class="darkBackground"></div>
+        <div id="editBox" class="editBox">
+            <div class="imageArea">
+                <img id="imageToEdit" class="imageToEdit">
+                <div class="imageOverlay"></div>
+                <canvas id="croppedCanvas" class="circle"></canvas>
+            </div>
+            <input id="sizeInput" type="range" min="0" max="100" value="0">
+            <div class="editOptions">
+                <button onclick="closePopUp()">Cancelar</button>
+                <button onclick="cropAndSend()">Guardar Cambios</button>
+            </div>
+        </div>
+
+        <script>
+            let offsetX = 0;
+            let offsetY = 0;
+        </script>
+        <script th:src="@{/js/dragndropmenu.js}"></script>
+        <script th:src="@{/js/adjustimage.js}"></script>
+        <script th:src="@{/js/cropImage.js}"></script>
+    </main>
+</body>
+</html>
+

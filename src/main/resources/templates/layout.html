@@ -16,8 +16,8 @@
             <li th:classappend="${(httpServletRequest.requestURI == '/turnos' || httpServletRequest.requestURI == '/turnosoffline') ? 'activeTab' : ''}">
                 <a th:href="@{/turnos}">Mis turnos</a>
             </li>
-            <li th:classappend="${httpServletRequest.requestURI == '/solicitudes' ? 'activeTab' : ''}">
-                <a th:href="@{/solicitudes}">Solicitudes</a>
+            <li th:classappend="${httpServletRequest.requestURI == '/sobremi' ? 'activeTab' : ''}">
+                <a th:href="@{/sobremi}">Solicitudes</a>
             </li>
             <li th:classappend="${httpServletRequest.requestURI == '/publicaciones' ? 'activeTab' : ''}">
                 <a th:href="@{/publicaciones}">Mis publicaciones</a>

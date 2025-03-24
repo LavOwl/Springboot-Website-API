@@ -94,9 +94,9 @@ public class HomeController {
         return "appointments";
     }
 
-    @GetMapping("/solicitudes")
+    @GetMapping("/sobremi")
     public String petitions(Model model) {
-        return "petitions";
+        return "about";
     }
 
     @GetMapping("/publicaciones")
@@ -106,12 +106,10 @@ public class HomeController {
     }
 
     @PostMapping("/subirpublicacion")
-    public String saveOrUpdate(@RequestParam("image") MultipartFile file, Model model){
+    public String saveOrUpdate(@RequestParam("title") String title, @RequestParam("description") String description, @RequestParam("type") String type, @RequestParam("image") MultipartFile file, Model model){
         try {
             byte[] imageData = file.getBytes();
-            TattooImage tattooImage = new TattooImage();
-            tattooImage.setImage(imageData);
-            tattooImage.setDescription("");
+            TattooImage tattooImage = new TattooImage(title, description, type, imageData);
             tattooImageService.saveOrUpdate(tattooImage);
 
             model.addAttribute("message", "Image uploaded successfully!");

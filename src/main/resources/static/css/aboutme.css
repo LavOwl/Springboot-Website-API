@@ -1,0 +1,139 @@
+:root{
+    --circle-size: 100px;
+}
+
+.uploadLabel{
+    display: block flex;
+    width: 15rem;
+    height: 15rem;
+    padding: 0.18rem;
+    text-align: center;
+    border-radius: 360px;
+    background: #131314;
+    background-size: cover;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    box-shadow: -2px 11px 24px 0px rgba(0,0,0,0.75);
+}
+
+.uploadData .uploadIcon{
+    width: 4rem;
+}
+
+.uploadLabel label{
+    text-decoration:underline;
+    color: #0077b6;
+}
+
+.uploadLabel label:hover{
+    cursor: pointer;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    border: 1px solid black;
+    width: 76% - 2px;
+    height: 18rem;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.data{
+    display:block;
+    height: 9rem;
+}
+
+.data input{
+    border: none;
+    background-color: whitesmoke;
+    min-width: none;
+}
+
+.darkBackground{
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.editBox{
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    top:50%;
+    left:50%;
+    translate: -50% -50%;
+    padding: 1rem 2rem;
+    background-color: white;
+    border-radius: 20px;
+    z-index: 2;
+    cursor: default;
+
+}
+
+
+.imageArea{
+    width: 75vw;
+    height: 75vh;
+    position: relative;
+    display: flex block;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.imageToEdit{
+    max-width: 75%;
+    max-height: 75%;
+    width: auto;
+    height: auto;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.imageOverlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    mask-image: radial-gradient(
+        circle var(--circle-size) at 50% 50%,
+        transparent var(--circle-size),
+        black calc(var(--circle-size) + 1px)
+    );
+    pointer-events: none;
+    z-index: 4;
+}
+
+.circle{
+    visibility: hidden;
+    position: absolute;
+    left:50%;
+    top:50%;
+    translate: -50% -50%;
+    border-radius: 360px;
+    z-index: 5;
+    /*width: calc(2*var(--circle-size));
+    height: calc(2*var(--circle-size));*/
+    background-color: transparent;
+    pointer-events: none;
+}
+
+.editOptions{
+    display: flex;
+    justify-content: end;
+}
