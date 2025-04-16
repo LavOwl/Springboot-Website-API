@@ -6,6 +6,7 @@
     justify-content: space-around;
     margin-bottom: 1.5rem;
     background-color: #131314;
+    overflow: hidden;
 }
 
 body, ul {
@@ -33,4 +34,8 @@ body, ul {
 
 .navegationBar > .activeTab a{
     color: white;
+}
+
+nav{
+    width:100%;
 }

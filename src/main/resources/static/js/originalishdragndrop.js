@@ -1,34 +1,23 @@
 const uploadLabel = document.getElementById("uploadLabel");
 const uploadInput = document.getElementById("uploadInput");
+const uploadData = document.getElementById("uploadData");
 const popUp = document.getElementById("darkBackground");
 const img = document.getElementById("imageToEdit");
-const sizeInput = document.getElementById("sizeInput");
 const box = document.getElementById("editBox");
 
 uploadInput.addEventListener("change", uploadImage);
-sizeInput.addEventListener("input", calculateSize);
 
 function uploadImage(){
-    offsetX = 0;
-    offsetY = 0;
     let imgSource = URL.createObjectURL(uploadInput.files[0]);
     popUp.style.display = "block";
     box.style.display = "flex block";
     img.src = imgSource;
     img.onload = () => {
-        sizeInput.value = 0;
-        calculateSize();
         document.documentElement.style.setProperty("--circle-size", `${(Math.min(img.clientWidth, img.clientHeight)/2).toString()}px`);
-        validateBoundries();
     };
-    uploadInput.value = "";
+    uploadLabel.style.backgroundImage = `url(${imgSource})`;
+    uploadData.textContent = "";
 };
-
-function calculateSize(){
-    img.style.maxWidth = `${75 + 75/100 * sizeInput.value}%`;
-    img.style.maxHeight = `${75 + 75/100 * sizeInput.value}%`; //Ajustar también el tamaño actual del máximo valor, dejar que ajuste el resto con auto.
-    validateBoundries();
-}
 
 function closePopUp(){
     popUp.style.display = "none";

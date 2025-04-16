@@ -1,5 +1,7 @@
 package rigdag.tattoowbpg.controllers;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +18,10 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import rigdag.tattoowbpg.entities.TattooImage;
 import rigdag.tattoowbpg.entities.User;
+import rigdag.tattoowbpg.dto.ProfileDTO;
+import rigdag.tattoowbpg.entities.Profile;
 import rigdag.tattoowbpg.services.GoogleConnectService;
+import rigdag.tattoowbpg.services.ProfileService;
 import rigdag.tattoowbpg.services.TattooImageService;
 import rigdag.tattoowbpg.services.UserService;
 
@@ -46,6 +51,9 @@ public class HomeController {
 
     @Autowired
     private TattooImageService tattooImageService;
+
+    @Autowired
+    private ProfileService profileService;
 
     @ModelAttribute
     public void addHttpServletRequestToModel(HttpServletRequest request, Model model) {
@@ -96,7 +104,19 @@ public class HomeController {
 
     @GetMapping("/sobremi")
     public String petitions(Model model) {
+        Profile profile = profileService.getProfile(1L).get();
+        model.addAttribute("profile", new ProfileDTO(profile));
         return "about";
+    }
+
+    @PostMapping("/actualizarPerfil")
+    public String updateProfile(@RequestParam("fullname") String fullname, @RequestParam("pronouns") String pronouns, @RequestParam("description") String description, @RequestParam("emailAddress") String emailAddress, @RequestParam("instagram") String instagram, @RequestParam("phoneNumber") String phoneNumber, @RequestParam(name = "image", required = false) MultipartFile file, Model model) throws IOException{
+        Profile original = profileService.getProfile(1L).get();
+        Profile profile = new Profile(fullname, LocalDate.now(), pronouns, description, emailAddress, instagram, phoneNumber, file != null ? file.getBytes() : original.getImage());
+
+        profile.setProfileId(1L);
+        profileService.saveOrUpdate(profile);
+        return "redirect:/sobremi";
     }
 
     @GetMapping("/publicaciones")

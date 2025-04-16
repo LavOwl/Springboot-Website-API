@@ -1,4 +1,6 @@
 const sourceImage = document.getElementById('imageToEdit');
+const sizeInputt = document.getElementById("sizeInput");
+
 
 const canvas = document.getElementById('croppedCanvas');
 const ctx = canvas.getContext('2d');
@@ -6,15 +8,13 @@ const ctx = canvas.getContext('2d');
 const csrfToken = document.querySelector('meta[name="_csrf"]').content;
 const csrfHeader = document.querySelector('meta[name="_csrf_header"]').content;
 
+var byteArray = null;
 
 
 function cropAndSend() {
-    const circleSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--circle-size'));
-
     var width = sourceImage.naturalWidth;
     var height = sourceImage.naturalHeight;
-    var min = Math.min(width, height);
-    var image = sourceImage.getBoundingClientRect();
+    var min = Math.min(width, height)/(1+sizeInputt.value/100);
 
     canvas.width = min;
     canvas.height = min;
@@ -24,11 +24,6 @@ function cropAndSend() {
     ctx.closePath();
     ctx.clip();
 
-    var baseTop = image.x - min;
-    var actualTop = canvas.getBoundingClientRect().x - min;
-    console.log(baseTop);
-    console.log(actualTop);
-
     ctx.drawImage(
         sourceImage, //image
         (width-min)/2 - offsetX*width/sourceImage.clientWidth, (height-min)/2 - offsetY*height/sourceImage.clientHeight, //where to cut
@@ -37,25 +32,31 @@ function cropAndSend() {
         min, min//resize
     );
 
-    canvas.toBlob(function (blob) {
-        const reader = new FileReader();
-        reader.onload = function () {
-            const arrayBuffer = reader.result;
-            const byteArray = new Uint8Array(arrayBuffer);
-            sendToBackend(byteArray);
-        };
-        reader.readAsArrayBuffer(blob);
-    }, 'image/png');
+    let url = canvas.toDataURL("image/png");
+    canvas.toBlob(function(blob){
+        byteArray = blob;
+    }, "image/png");
+    uploadLabel.style.backgroundImage = `url(${url})`;
 }
 
-function sendToBackend(byteArray) {
-    const formData = new FormData();
-    formData.append('title', "holis");
-    formData.append('description', "desc :3");
-    formData.append('type', "type");
-    formData.append('image', new Blob([byteArray], { type: 'application/octet-stream' }));
+document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(); //Create Form object to send
 
-    fetch('/subirpublicacion', {
+    let formElements = document.getElementById('uploadForm').elements; //List all form elements
+
+    for (let i = 0; i < formElements.length; i++) {
+        let element = formElements[i];
+        
+        if (element.type === "submit" || element.type === "file") continue; //Skips the submit button and the img input
+
+        formData.append(element.name, element.value); //Appends the element to FormData
+    }
+    if(byteArray != null){
+        formData.append("image", new Blob([byteArray]));
+    }
+
+    fetch('/actualizarPerfil', {
         method: 'POST',
         body: formData,
         headers: {
@@ -65,4 +66,4 @@ function sendToBackend(byteArray) {
         .then(response => response.json())
         .then(data => console.log("Backend Response:", data))
         .catch(error => console.error("Error:", error));
-}
+});
