@@ -45,11 +45,14 @@ profileImage.addEventListener('mouseleave', function () {
   isDragging = false;
 });
 
-imageArea.addEventListener("wheel", (e) => {
+imageArea.addEventListener("wheel", (e) => scrollBehaviour(e)); 
+
+function scrollBehaviour(e){
   e.preventDefault();
   const step = 5;
   let newValue = parseInt(sizeInput.value) + (e.deltaY < 0 ? step : -step);
   newValue = Math.max(parseInt(sizeInput.min), Math.min(parseInt(sizeInput.max), newValue));
   sizeInput.value = newValue;
   sizeInput.dispatchEvent(new Event("input")); //Trigger input event manually
-});
+};
+

@@ -1,32 +1,87 @@
-.card{
-    display: block flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 18rem;
-    height: 14.5rem;
-    padding: 0.5rem;
-    border-radius: 20px;
-    border: 1px solid black;
-    background-color: rgba(255, 255, 255, 0);
-    backdrop-filter: blur(5px);
+:root{
+    --card-height: 20rem;
 }
 
+.card{
+    position: relative;
+    aspect-ratio: calc(3/4);
+    height: var(--card-height);
+    overflow:hidden;
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter:blur(5px);
+    border: 1px solid white;
+}
+
+.card:hover{
+    cursor: pointer;
+}
+
+.card::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    background-color: gray;
+    color: gray;
+    transition: 1s;
+}
+
+.card:hover:after{
+    opacity: 0.5;
+}
+
+
 .card img{
-    display: block;
-    max-height: 13rem;
-    max-width: 16rem;
-    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .textcontainer{
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+
+    height: fit-content;
+    width: calc(100% - 1rem);
+
     display: block;
-    text-align:justify;
+    text-align:left;
+    transition: 1s;
+    z-index: 2;
+}
+
+.textcontainer h3{
+    color: white;
+    inline-size: 13.5rem;
+    overflow-wrap: break-word;
+    transform: translateY(0%);
+    padding-bottom: 1rem;
+    transition: 1s;
 }
 
 .textcontainer p{
-    background: -webkit-linear-gradient(black, rgba(0,0,0,0.15));
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: -webkit-linear-gradient(black 0%, rgba(0,0,0,0.15) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    height: 13rem;
-    overflow: hidden;
+    height: calc(var(--card-height) - 100% - 1.8rem);
+    transition: 1s;
+}
+
+.card:hover .textcontainer{
+    bottom: 100%;
+}
+
+.card:hover .textcontainer h3{
+    transform: translateY(calc(100% + 1.3rem));
+}
+
+.card:hover .textcontainer p{
+    top: 200%;
 }

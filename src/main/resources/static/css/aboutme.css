@@ -1,321 +1,325 @@
 :root{
     --circle-size: 100px;
-    --phone-width: 300px;
+    --fill-percent: 0%;
+    --box-background: white;
 }
 
-.grid1{
-    grid-area: image;
+main{
+    
+}
+
+#uploadForm{
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-}
 
-.uploadLabel{
-    display: block flex;
+    width: 100%;
     height: 100%;
-    aspect-ratio: 1 / 1;
-    padding: 0.18rem;
-    border-radius: 360px;
-    background-size:contain;
-    align-items: center;
-    justify-content: center;
-    box-shadow: -2px 11px 24px 0px rgba(0,0,0,0.75);
-    transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
-    cursor: pointer;
-}
+    margin-top: calc(5rem - 1.5vh + 5vh);
 
-.uploadLabel:hover{
-    height: 120%;
-    opacity: 0.6;
+    background: linear-gradient(#131314, #343a40, #131314);
 }
-
-.invisbleCircle{
-    display: block flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    width: 12rem;
-    max-width: 30vw;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    box-shadow: -2px 11px 24px 0px rgba(0,0,0,0.75);
-    background-color: #e5e5e5;
-    overflow: hidden;
-}
-
-.invisbleCircle img{
-    opacity: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    width: 10%;
-    aspect-ratio: 1/1;
-    pointer-events: none;
-    transition: 0.5s;
-}
-
-.invisbleCircle:hover img{
-    opacity: 1;
-    width: 30%;
-}
-
 
 header{
     display: grid;
     grid-template-columns: 1fr, 2fr;
     grid-template-areas: "image data";
-    background: linear-gradient(#131314, #343a40);
-    border-radius: 20px;
-    min-width: var(--phone-width);
-    border: 1px solid black;
-    width: calc(70% - 2px);
-    padding: 3vh 5%;
+
+    width: calc(100% - 6vw);
     height:fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    overflow: hidden;
+    padding: 3vh 3vw;
 }
-
-.data{
-    grid-area: data;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items:start;
-    justify-content:left;
-    gap: 1.5rem;
-    padding-left: 1.5rem;
-    padding-top: 1.5rem;
-}
-
-
-@keyframes gradient {
-    0% {
-      background-position: 0 0;
+/* ---> */
+    .grid1{
+        display: flex;
+        justify-content: center;
+        
+        grid-area: image;
     }
-    100% {
-      background-position: 100% 0;
+    /* ---> */
+        /*START OF PFP*/
+        .invisbleCircle{
+            display: block flex;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            
+            width: 10rem;
+            height: 10rem;
+            transform: translateY(calc(-50% - 3vh));
+
+            border-radius: 50%;
+            box-shadow: -2px 11px 24px 0px rgba(0,0,0,0.75);
+            background-color: #e5e5e5;
+            overflow: hidden;
+        }
+
+        .invisbleCircle img{
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            width: 10%;
+            aspect-ratio: 1/1;
+            pointer-events: none;
+            transition: 0.5s;
+        }
+
+        .invisbleCircle:hover img{
+            opacity: 1;
+            width: 30%;
+        }
+
+        .uploadLabel{
+            display: block flex;
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            padding: 0.18rem;
+            border-radius: 360px;
+            background-size:contain;
+            align-items: center;
+            justify-content: center;
+            box-shadow: -2px 11px 24px 0px rgba(0,0,0,0.75);
+            transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
+            cursor: pointer;
+        }
+
+        .uploadLabel:hover{
+            height: 120%;
+            opacity: 0.6;
+        }
+        /*END OF PFP*/
+    /* <--- */
+/* <--- */
+/* ---> */
+    .data{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+
+        grid-area: data;
+        margin-left: 2rem;
     }
-}
+    /* ---> */
+        @keyframes gradient {
+            0% {
+            background-position: 0 0;
+            }
+            100% {
+            background-position: 100% 0;
+            }
+        }
+        
+        .cyling-input-wrapper {
+            position: relative;
+            display: block;
+            width:fit-content;
+            height: fit-content;
+            margin: 0 0;
+            max-width: 80%;
+            border-radius: 2px; 
+            background: transparent;
+        }
+        
+        .cyling-input-wrapper:after {
+            content: "";
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            height: 2px;
+            border-bottom-left-radius: 2px;
+            border-bottom-right-radius: 2px;
+            background-position: 0% 0%;
+            background: linear-gradient(to right, #FB130D, #E2A9AF, #f00699, #E2A9AF, #FB130D, #E2A9AF);
+            background-size: 500% auto;
+            animation: gradient 3s linear infinite;
+        }
+        
+        .cyling-input-wrapper input {
+            border-style: none;
+            background: transparent;
+            outline: none;
+            color: white;
+            font-size: 0.9rem;
+            vertical-align: middle;
+            padding: 0.5rem 0.4rem 0.6rem;
+            border-radius: 5px 5px 0px 0px;
+        }
+        .cyling-input-wrapper input::-webkit-input-placeholder {
+            color: #E2A9AF;
+            font-style: italic;
+        }
 
-.cyling-input-wrapper {
-    position: relative;
-    display: block;
-    width:fit-content;
-    height: fit-content;
-    margin: 0 0;
-    max-width: 80%;
-    border-radius: 2px; 
-    background: transparent;
-}
+        .editableInput:hover{
+            cursor:pointer;
+        }
+        .editableInput:not([readonly]){
+            background-color: #343a40;
+        }
+    /* <--- */
+/* <--- */
 
-.cyling-input-wrapper:after {
-    content: "";
-    position: absolute;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    height: 2px;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    background-position: 0% 0%;
-    background: linear-gradient(to right, #FB130D, #E2A9AF, #f00699, #E2A9AF, #FB130D, #E2A9AF);
-    background-size: 500% auto;
-    animation: gradient 3s linear infinite;
-}
+/* ---> */
+    section{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
-.cyling-input-wrapper input {
-    border-style: none;
-    background: transparent;
-    outline: none;
-    color: white;
-    font-size: 0.9rem;
-    vertical-align: middle;
-    padding: 0.5rem 0.4rem 0.6rem;
-    border-radius: 5px 5px 0px 0px;
-}
-.cyling-input-wrapper input::-webkit-input-placeholder {
-    color: #E2A9AF;
-    font-style: italic;
-}
+        width: 80%;
+        margin: auto;
+    }
+    /* ---> */
+        section textarea{
+            width: 100%;
+            margin-top: 1rem;
+            background: transparent;
+            border: none;
+            color: white;
+            resize: none;
+            overflow: hidden; /* Required to hide scrollbars */
+            box-sizing: border-box;
+        }
+
+        section textarea:focus{
+            border:none;
+            outline: none;
+        }
+
+        section label{
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+            color: white;
+        }
+
+        .send-wrapper{
+            display: flex;
+            justify-content: flex-end;
+
+            width: 100%;
+
+            margin-top: 1rem;
+        }
+        /* ---> */
+            @property --angle {
+                syntax: '<angle>';
+                inherits: false;
+                initial-value: 0deg;
+            }
+
+            .uploadButton {
+                --angle: 0deg;
+                padding: calc(13rem/16) calc(20rem/16) calc(13rem/16);
+                letter-spacing: 1px;
+                font-weight: 200;
+                border: 1px solid transparent;
+                background: 
+                linear-gradient(white, white) padding-box,
+                linear-gradient(var(--angle), #E2A9AF 20%, #f00699 70%) border-box;
+                transition: --angle 0.5s;
+                color: black;
+                margin-bottom: 1rem;
+            }
+            
+            .uploadButton:hover {
+                cursor: pointer;
+                --angle: 360deg;
+                background: 
+                    linear-gradient(#131314, #131314) padding-box,
+                    linear-gradient(var(--angle), #E2A9AF 50%, #f00699 50%) border-box;
+                box-shadow: 0 0 20px rgba(240, 6, 153, 0.7), 0 0 40px rgba(240, 6, 153, 0.5);
+                color:white;
+            }
+
+            .rotating-border{
+                position: relative;
+                width: 95%;
+                height: 95%;
+            }
+         /* <--- */
+     /* <--- */
+ /* <--- */
+
+
 
 .darkBackground{
     display: none;
     background-color: rgba(0, 0, 0, 0.5);
-    position: absolute;
+    position: fixed;
     top: 0%;
     left: 0%;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: 1;
 }
+/* ---> */
+    .editBox{
+        display: none;
+        position: fixed;
+        flex-direction: column;
+        top:50%;
+        left:50%;
+        translate: -50% -50%;
+        padding: 1rem 2rem;
+        background-color: var(--box-background);
+        border-radius: 20px;
+        z-index: 2;
+        cursor: default;
 
-.editBox{
-    display: none;
-    position: absolute;
-    flex-direction: column;
-    top:50%;
-    left:50%;
-    translate: -50% -50%;
-    padding: 1rem 2rem;
-    background-color: white;
-    border-radius: 20px;
-    z-index: 2;
-    cursor: default;
+    }
+    /* ---> */
+        .imageArea{
+            width: 75vw;
+            height: 75vh;
+            position: relative;
+            display: flex block;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        /* ---> */
+            .imageToEdit{
+                max-width: 75%;
+                max-height: 75%;
+                width: auto;
+                height: auto;
+                user-select: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+            }
 
-}
+            .imageOverlay{
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: block;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                mask-image: radial-gradient(
+                    circle calc(var(--circle-size) - 1px) at 50% 50%,
+                    transparent calc(var(--circle-size) - 1px),
+                    black calc(var(--circle-size) - 0px)
+                );
+                pointer-events: none;
+                z-index: 4;
+            }
 
-
-.imageArea{
-    width: 75vw;
-    height: 75vh;
-    position: relative;
-    display: flex block;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.imageToEdit{
-    max-width: 75%;
-    max-height: 75%;
-    width: auto;
-    height: auto;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-}
-
-.imageOverlay{
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    mask-image: radial-gradient(
-        circle calc(var(--circle-size) - 1px) at 50% 50%,
-        transparent calc(var(--circle-size) - 1px),
-        black calc(var(--circle-size) - 0px)
-    );
-    pointer-events: none;
-    z-index: 4;
-}
-
-.circle{
-    visibility: hidden;
-    position: absolute;
-    left:50%;
-    top:50%;
-    translate: -50% -50%;
-    border-radius: 360px;
-    z-index: 5;
-    background-color: transparent;
-    pointer-events: none;
-}
-
-.editOptions{
-    display: flex;
-    justify-content: end;
-}
-
-section{
-    display: flex;
-    align-items: center;
-    margin-top: 5vh;
-    justify-content: center;
-    background: linear-gradient(#343a40, #131314);
-    border-radius: 20px;
-    border: 1px solid black;
-    width: calc(80% - 2px);
-    min-width: calc(var(--phone-width) + 10%);
-    height: 18rem;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-section textarea{
-    width: 95%;
-    height: 95%;
-    margin-top: 1rem;
-    margin-left: 1rem;
-    background: transparent;
-    border: none;
-    color: white;
-    resize: none;
-}
-
-section textarea:focus{
-    border:none;
-    outline: none;
-}
-
-
-
-
-
-.editableInput:hover{
-    cursor:pointer;
-}
-.editableInput:not([readonly]){
-    background-color: #343a40;
-}
-
-@property --text-angle {
-    syntax: '<angle>';
-    inherits: false;
-    initial-value: 0deg;
-  }
-
-.rotating-border{
-  position: relative;
-  width: 95%;
-  height: 95%;
-  --text-angle: 0;
-}
-
-@keyframes rotate {
-    to {
-        --text-angle: 360deg;
-      }
-}
-
-.send-wrapper{
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1rem;
-    width: 80%;
-    min-width: calc(var(--phone-width) + 10%);
-    margin-left: auto;
-    margin-right: auto;
-}
-
-@property --angle {
-    syntax: '<angle>';
-    inherits: false;
-    initial-value: 0deg;
-  }
-  
-.uploadButton {
-    --angle: 0deg;
-    padding: 0.4rem 0.8rem;
-    border: 2.5px solid transparent;
-    background: 
-      linear-gradient(#343a40, #343a40) padding-box,
-      linear-gradient(var(--angle), #E2A9AF 20%, #f00699 70%) border-box;
-    border-radius: 18px;
-    transition: --angle 0.5s;
-    color: white;
-}
-  
-.uploadButton:hover {
-    cursor: pointer;
-    --angle: 360deg;
-    background: 
-        linear-gradient(#131314, #131314) padding-box,
-        linear-gradient(var(--angle), #E2A9AF 50%, #f00699 50%) border-box;
-    box-shadow: 0 0 20px rgba(240, 6, 153, 0.7), 0 0 40px rgba(240, 6, 153, 0.5);
-}
+            .circle{
+                visibility: hidden;
+                position: absolute;
+                left:50%;
+                top:50%;
+                translate: -50% -50%;
+                border-radius: 50%;
+                z-index: 5;
+                background-color: transparent;
+                pointer-events: none;
+            }
+        /* <--- */
+    /* <--- */
+/* <--- */

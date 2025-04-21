@@ -1,6 +1,8 @@
 package rigdag.tattoowbpg.controllers;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -72,6 +74,7 @@ public class HomeController {
 
     @GetMapping("/turnos")
     public String getCalendarEvents(Model model) throws Exception {
+
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //Fetch logged user
         user = userService.getUserById(user.getId()).get(); //Fetch by id to get the token from the BD (it's not stored in the principal itself)
         if(user.getGoogleAccessToken() == null){
@@ -104,18 +107,29 @@ public class HomeController {
 
     @GetMapping("/sobremi")
     public String petitions(Model model) {
+
         Profile profile = profileService.getProfile(1L).get();
         model.addAttribute("profile", new ProfileDTO(profile));
+
         return "about";
     }
 
     @PostMapping("/actualizarPerfil")
-    public String updateProfile(@RequestParam("fullname") String fullname, @RequestParam("pronouns") String pronouns, @RequestParam("description") String description, @RequestParam("emailAddress") String emailAddress, @RequestParam("instagram") String instagram, @RequestParam("phoneNumber") String phoneNumber, @RequestParam(name = "image", required = false) MultipartFile file, Model model) throws IOException{
+    public String updateProfile(
+        @RequestParam("fullname") String fullname, 
+        @RequestParam("pronouns") String pronouns, 
+        @RequestParam("description") String description, 
+        @RequestParam("emailAddress") String emailAddress, 
+        @RequestParam("instagram") String instagram, @RequestParam("phoneNumber") String phoneNumber, 
+        @RequestParam(name = "image", required = false) MultipartFile file, 
+        Model model) throws IOException{
+
         Profile original = profileService.getProfile(1L).get();
         Profile profile = new Profile(fullname, LocalDate.now(), pronouns, description, emailAddress, instagram, phoneNumber, file != null ? file.getBytes() : original.getImage());
 
         profile.setProfileId(1L);
         profileService.saveOrUpdate(profile);
+
         return "redirect:/sobremi";
     }
 
@@ -126,22 +140,66 @@ public class HomeController {
     }
 
     @PostMapping("/subirpublicacion")
-    public String saveOrUpdate(@RequestParam("title") String title, @RequestParam("description") String description, @RequestParam("type") String type, @RequestParam("image") MultipartFile file, Model model){
+    public String saveOrUpdate(
+        @RequestParam("title") String title,
+        @RequestParam("description") String description, 
+        @RequestParam("type") String type, 
+        @RequestParam("image") MultipartFile file, 
+        Model model) throws IOException, InterruptedException{
+
         try {
-            byte[] imageData = file.getBytes();
+            String originalFilename = file.getOriginalFilename();
+            String extension = getFileExtension(originalFilename).toLowerCase();
+    
+            byte[] imageData;
+    
+            switch (extension) {
+                case "heic":
+                case "avif":
+                    // Use external converter (ImageMagick or similar)
+                    File tempInput = File.createTempFile("upload_", "." + extension);
+                    File tempOutput = File.createTempFile("converted_", ".jpg");
+                    file.transferTo(tempInput);
+    
+                    ProcessBuilder pb = new ProcessBuilder("magick", tempInput.getAbsolutePath(), tempOutput.getAbsolutePath());
+                    pb.redirectErrorStream(true);
+                    Process process = pb.start();
+                    process.waitFor();
+    
+                    imageData = Files.readAllBytes(tempOutput.toPath());
+                    tempInput.delete();
+                    tempOutput.delete();
+                    break;
+    
+                default:
+                    imageData = file.getBytes();
+            }
+    
             TattooImage tattooImage = new TattooImage(title, description, type, imageData);
             tattooImageService.saveOrUpdate(tattooImage);
-
+    
             model.addAttribute("message", "Image uploaded successfully!");
         } catch (Exception e) {
             model.addAttribute("message", "Failed to upload image: " + e.getMessage());
+            throw e;
         }
         return "redirect:/publicaciones";
     }
 
+    private String getFileExtension(String filename) {
+        return filename != null && filename.contains(".")
+            ? filename.substring(filename.lastIndexOf('.') + 1)
+            : "";
+    }
+
 
     @GetMapping("/login/oauth2/code/google")
-    public String grantCode(@RequestParam("code") String code, @RequestParam("scope") String scope, @RequestParam("authuser") String authUser, @RequestParam("prompt") String prompt) {
+    public String grantCode(
+        @RequestParam("code") String code,
+        @RequestParam("scope") String scope,
+        @RequestParam("authuser") String authUser,
+        @RequestParam("prompt") String prompt) {
+
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String token = googleConnectService.getOauthAccessTokenGoogle(code);
         userService.addToken(userService.getUserById(user.getId()).get(), token);

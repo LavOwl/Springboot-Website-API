@@ -1,38 +1,38 @@
 const uploadLabel = document.getElementById("uploadLabel");
 const uploadInput = document.getElementById("uploadInput");
-const popUp = document.getElementById("darkBackground");
-const img = document.getElementById("imageToEdit");
-const sizeInput = document.getElementById("sizeInput");
-const box = document.getElementById("editBox");
+const uploadData = document.getElementById("uploadData");
+const loader = document.getElementById("loader");
 
 uploadInput.addEventListener("change", uploadImage);
-sizeInput.addEventListener("input", calculateSize);
 
-function uploadImage(){
-    offsetX = 0;
-    offsetY = 0;
-    let imgSource = URL.createObjectURL(uploadInput.files[0]);
-    popUp.style.display = "block";
-    box.style.display = "flex block";
-    img.src = imgSource;
-    img.onload = () => {
-        sizeInput.value = 0;
-        calculateSize();
-        document.documentElement.style.setProperty("--circle-size", `${(Math.min(img.clientWidth, img.clientHeight)/2).toString()}px`);
-        validateBoundries();
-    };
-    uploadInput.value = "";
+async function uploadImage(){
+    let file = uploadInput.files[0];
+    if (!file) return;
+    let imgSource;
+    uploadData.style.display = "none";
+
+    if (file.type === "image/heic" || file.name.split('.').pop().toLowerCase() === "heic") {
+        try {
+            loader.style.display = "block";
+            file = await heic2any({ blob: file, toType: "image/png" });
+            loader.style.display = "none";
+        } catch (e) {
+            alert("No se pudo mostrar tu imagen .HEIC, es posible que sea posible publicarla a pesar de esto, de esto fallar intente usar otra extensión (jpg, png).");
+            clearImage();
+            return;
+        }
+    }
+
+    imgSource = URL.createObjectURL(file);
+    uploadInput.src = imgSource;
+    uploadLabel.style.backgroundImage = `url(${imgSource})`;
 };
 
-function calculateSize(){
-    img.style.maxWidth = `${75 + 75/100 * sizeInput.value}%`;
-    img.style.maxHeight = `${75 + 75/100 * sizeInput.value}%`; //Ajustar también el tamaño actual del máximo valor, dejar que ajuste el resto con auto.
-    validateBoundries();
-}
-
-function closePopUp(){
-    popUp.style.display = "none";
-    box.style.display = "none";
+function clearImage(){
+    loader.style.display = "none";
+    uploadData.style.display = "flex";
+    uploadLabel.style.backgroundImage = "none";
+    
 }
 
 uploadLabel.addEventListener("dragover", function(e){

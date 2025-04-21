@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
     <link rel="stylesheet" th:href="@{/css/aboutme.css}">
+    <link rel="stylesheet" th:href="@{/css/buttons.css}">
     <title>Inicio | Tattoos</title>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
@@ -32,26 +33,26 @@
 
             </header>
             <section>
-                <label class="editableInput" hidden for="description">Descripción</label>
-                <div class="rotating-border"><textarea th:text="${profile.getDescription()}" name="description" oninput="autoResize(this)" id="description" rows="1"></textarea></div>
-            </section>
+                <label for="description">Descripción</label>
+                <textarea th:text="${profile.getDescription()}" name="description" oninput="autoResize(this)" id="description"></textarea>
 
-            <div class="send-wrapper">
-                <button class="uploadButton" type="submit">Guardar Cambios</button>
-            </div>
+                <div class="send-wrapper">
+                    <button class="uploadButton" type="submit">Guardar Cambios</button>
+                </div>
+            </section>
         </form>
 
         <div id="darkBackground" class="darkBackground"></div>
         <div id="editBox" class="editBox">
             <div id="imageArea" class="imageArea">
                 <img id="imageToEdit" class="imageToEdit">
-                <div class="imageOverlay"></div>
+                <div id="imageOverlay" class="imageOverlay"></div>
                 <canvas id="croppedCanvas" class="circle"></canvas>
             </div>
             <input id="sizeInput" type="range" min="0" max="100" value="0">
             <div class="editOptions">
                 <button onclick="closePopUp()">Cancelar</button>
-                <button onclick="cropAndSend(); closePopUp()">Guardar Cambios</button>
+                <button onclick="cropAndSend(); closePopUp()">Confirmar</button>
             </div>
         </div>
 
@@ -64,10 +65,10 @@
                 uploadLabel.style.backgroundImage = `url(${base64Image})`;
             };
         </script>
-        <script th:src="@{/js/dragndropmenu.js}"></script>
         <script th:src="@{/js/adjustimage.js}"></script>
         <script th:src="@{/js/cropImage.js}"></script>
         <script th:src="@{/js/input.js}"></script>
+        <script th:src="@{/js/autoResizeTextarea}"></script>
     </main>
 </body>
 </html>

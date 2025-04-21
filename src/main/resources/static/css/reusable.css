@@ -1,10 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap");
+
 html{
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Raleway', 'Work Sans', sans-serif;
     background-image: url("/images/Inkbackground.png");
     background-size: cover;
 }
 
 textarea{
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Raleway', 'Work Sans', sans-serif;
+}
+
+h1{
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    font-weight: normal;
+    font-size: 2rem;
+    font-weight: 300;
+    text-align: center;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    line-height: 1.2;
+}
+
+h2{
+    margin: 0;
+    padding: 0;
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+h3{
+    margin: 0;
+    padding: 0;
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+    margin-top: 1rem;
 }

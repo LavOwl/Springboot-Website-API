@@ -4,17 +4,21 @@
     <title>Inicio | Tattoos</title>
     <link rel="stylesheet" th:href="@{/css/publications.css}">
     <link rel="stylesheet" th:href="@{/css/card.css}">
+    <link rel="stylesheet" th:href="@{/css/buttons.css}">
 </head>
 <body>
     <main layout:fragment="content">
         <h1>Publicaciones</h1>
 
-        <ul class="list">
-            <li class="tattooListElement" th:each="image : ${images}">
-                <div th:replace="shared :: card(${image})"></div>
-            </li>
-        </ul>
-
+        <div class="list-wrapper">
+            <button class="scroll-btn left hidden" onclick="scrollCards(-1)"></button>
+            <ul id="list" class="list">
+                <li class="tattooListElement" th:each="image : ${images}">
+                    <div th:replace="shared :: card(${image})"></div>
+                </li>
+            </ul>
+            <button class="scroll-btn right hidden" onclick="scrollCards(1)"></button>
+        </div>
         
         <form class="uploadForm" th:action="@{/subirpublicacion}" method="post" enctype="multipart/form-data">
             <div class="texts">
@@ -33,33 +37,31 @@
                     <option value="3">Tatuaje Curado</option>
                 </select>
             </div>
-
-            <input id="uploadInput" class="uploadInput" type="file" name="image" accept="image/*" required hidden>
-            <div id="uploadLabel" class="uploadLabel">
-                
+            <div class="imgAndUploadWrapper">
+                <input id="uploadInput" class="uploadInput" type="file" name="image" accept=".jpg,.jpeg,.png,.webp,.gif,.heic,.avif" required hidden>
+                <div id="uploadLabel" class="uploadLabel">
                     
-                    <div id="uploadData" class="uploadData">
-                        <img class="uploadIcon" th:src="@{/icons/Upload_Icon.png}">
-                        <p>Arrastrar aquí, o <label for="uploadInput">explorar archivos.</label></p>
+                        <div id="loader" class="loader"></div>
+                        <div id="uploadData" class="uploadData">
+                            <img class="uploadIcon" th:src="@{/icons/Upload_Icon.png}">
+                            <p>Arrastrar aquí, o <label for="uploadInput">explorar archivos.</label></p>
+                        </div>
+                    
+                </div>
+                <div class="send-wrapper">
+                    <div class="editOptions">
+                        <button onclick="clear()" class="clearButton">Borrar</button>
+                        <button class="uploadButton" type="submit">Publicar</button>
                     </div>
-                
-            </div>
-            <div class="send-wrapper">
-                <button class="uploadButton" type="submit">Subir ↑</button>
+                </div>
             </div>
         </form>
 
 
         <script th:src="@{/js/dragndropmenu.js}"></script>
-        <script>
-            function autoResize(textarea) {
-              textarea.style.height = 'auto';
-              textarea.style.height = textarea.scrollHeight + 'px';
-            }
-            document.addEventListener("DOMContentLoaded", function () {
-                document.querySelectorAll("textarea").forEach(textarea => autoResize(textarea));
-            });
-        </script>
+        <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.3/dist/heic2any.min.js"></script>
+        <script th:src="@{/js/buttonScroll.js}"></script>
+        <script th:src="@{/js/autoResizeTextarea}"></script>
 
         
     </main>

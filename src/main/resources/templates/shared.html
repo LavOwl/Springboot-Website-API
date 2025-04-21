@@ -9,6 +9,7 @@
     <div th:fragment="card(image)" class="card">
         <img class="tattooImg" th:src="@{'api/petitions/' + ${image.getTattooImageId()}}" alt="Tattoo Image">
         <div class="textcontainer">
+            <h3 th:text="${image.getTitle()}"></h3>
             <p th:text="${image.getDescription()}"></p>
         </iv>
     </div>
