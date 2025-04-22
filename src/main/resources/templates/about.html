@@ -20,11 +20,11 @@
                 </div>
 
                 <div class="data">
-                    <div hidden class="socialMedia">
-                        <input th:value="${profile.getInstagram()}" name="instagram" id="instagram" type="text" placeholder="Instagram">
-                        <input th:value="${profile.getEmailAddress()}" name="emailAddress" id="emailAddress" type="text" placeholder="Email">
-                        <input th:value="${profile.getPhoneNumber()}" name="phoneNumber" id="phoneNumber" type="text" placeholder="Teléfono">
-                    </div>
+                    <ul class="socialMedia">
+                        <li th:each="network : ${socialMedia}">
+                            <a th:href="${network.getLink()}" target="_blank"><img th:src="${network.getImage()}"></a>
+                        </li>
+                    </ul>
                 
                     <div class="cyling-input-wrapper"><input class="editableInput" th:value="${profile.getFullname()}" name="fullname" id="name" type="text" placeholder="Nombre"></div>
                     <div class="cyling-input-wrapper"><input class="editableInput" name="age" id="age" type="date"></div>
@@ -68,7 +68,7 @@
         <script th:src="@{/js/adjustimage.js}"></script>
         <script th:src="@{/js/cropImage.js}"></script>
         <script th:src="@{/js/input.js}"></script>
-        <script th:src="@{/js/autoResizeTextarea}"></script>
+        <script th:src="@{/js/autoResizeTextarea.js}"></script>
     </main>
 </body>
 </html>

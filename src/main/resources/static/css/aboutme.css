@@ -5,7 +5,7 @@
 }
 
 main{
-    
+   
 }
 
 #uploadForm{
@@ -21,20 +21,30 @@ main{
 }
 
 header{
-    display: grid;
-    grid-template-columns: 1fr, 2fr;
-    grid-template-areas: "image data";
+    display: flex;
+    justify-content: space-between;
 
-    width: calc(100% - 6vw);
+    width: 80%;
+    margin: auto;
+
     height:fit-content;
-    padding: 3vh 3vw;
+    padding: 3vh 0;
 }
+
+@media only screen and (max-width: 400px) {
+    header{
+        width: 100%;
+    }
+}
+
 /* ---> */
     .grid1{
         display: flex;
         justify-content: center;
-        
-        grid-area: image;
+        width: 10rem;
+        height: 5rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
     /* ---> */
         /*START OF PFP*/
@@ -94,14 +104,54 @@ header{
 /* <--- */
 /* ---> */
     .data{
+        position: relative;
+
+        max-width: calc(100% - 12rem);
+
         display: flex;
         flex-wrap: wrap;
         gap: 1.5rem;
-
-        grid-area: data;
-        margin-left: 2rem;
     }
     /* ---> */
+
+        .socialMedia{
+            display: flex;
+            justify-content: end;
+            align-items: end;
+
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: translate(0%, calc(-100% - 3vh));
+
+            list-style: none;
+        }
+
+        .socialMedia li a {
+            width: 100%;
+        }
+
+        .socialMedia img{
+            width: 1.5rem;
+            aspect-ratio: 1/1;
+            transition: 0.5s;
+            padding: 0.1rem;
+        }
+
+        .socialMedia img:hover{
+            width: 2.4rem;
+        }
+
+        .socialMedia li:hover + li a img{
+            width: 2rem;
+        }
+
+        .socialMedia li:has(+ li:hover){
+            a img{
+                width: 2rem;
+            }
+        }
+
         @keyframes gradient {
             0% {
             background-position: 0 0;
@@ -115,9 +165,9 @@ header{
             position: relative;
             display: block;
             width:fit-content;
+            max-width: 100%;
             height: fit-content;
             margin: 0 0;
-            max-width: 80%;
             border-radius: 2px; 
             background: transparent;
         }
@@ -141,6 +191,9 @@ header{
             border-style: none;
             background: transparent;
             outline: none;
+
+            max-width: 100%;
+
             color: white;
             font-size: 0.9rem;
             vertical-align: middle;
@@ -178,7 +231,7 @@ header{
             border: none;
             color: white;
             resize: none;
-            overflow: hidden; /* Required to hide scrollbars */
+            overflow: hidden;
             box-sizing: border-box;
         }
 

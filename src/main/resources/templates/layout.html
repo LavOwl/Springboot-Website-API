@@ -9,6 +9,7 @@
     <link rel="icon" type="image/x-icon" th:href="@{/icons/tattoo-studio.png}">
 </head>
 <body>
+    <div class="topBar"><input class="openMenu" type="checkbox"></div>
     <nav>
         <ul class="navegationBar">
             <li th:classappend="${httpServletRequest.requestURI == '/' ? 'activeTab' : ''}">

@@ -15,8 +15,6 @@ function scrollCards(direction) {
 
 function updateButtons() {
     const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-    console.log(scrollContainer.scrollWidth);
-    console.log(scrollContainer.clientWidth);
     leftBtn.classList.toggle('hidden', scrollContainer.scrollLeft === 0);
     rightBtn.classList.toggle('hidden', scrollContainer.scrollLeft >= maxScroll - 1);
 }

@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import rigdag.tattoowbpg.entities.Petition;
+import rigdag.tattoowbpg.entities.SocialMedia;
 import rigdag.tattoowbpg.entities.TattooImage;
-import rigdag.tattoowbpg.services.PetitionService;
+import rigdag.tattoowbpg.services.SocialMediaService;
 import rigdag.tattoowbpg.services.TattooImageService;
 
 @RestController //Equivalent to @Controller for the class + @ResponseBody for each method
@@ -20,7 +20,7 @@ import rigdag.tattoowbpg.services.TattooImageService;
 public class APIController {
 
     @Autowired
-    private PetitionService petitionService;
+    private SocialMediaService socialMediaService;
 
     @Autowired
     private TattooImageService tattooImageService;
@@ -31,8 +31,8 @@ public class APIController {
     }
 
     @PostMapping
-    public void saveOrUpdate(@RequestBody Petition petition){
-        petitionService.saveOrUpdate(petition);
+    public void saveOrUpdate(@RequestBody SocialMedia SocialMedia){
+        socialMediaService.saveOrUpdate(SocialMedia);
     }
 
     @GetMapping("/{tattooImageId}")

@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,9 +22,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import rigdag.tattoowbpg.entities.TattooImage;
 import rigdag.tattoowbpg.entities.User;
 import rigdag.tattoowbpg.dto.ProfileDTO;
+import rigdag.tattoowbpg.dto.SocialMediaDTO;
 import rigdag.tattoowbpg.entities.Profile;
 import rigdag.tattoowbpg.services.GoogleConnectService;
 import rigdag.tattoowbpg.services.ProfileService;
+import rigdag.tattoowbpg.services.SocialMediaService;
 import rigdag.tattoowbpg.services.TattooImageService;
 import rigdag.tattoowbpg.services.UserService;
 
@@ -56,6 +59,9 @@ public class HomeController {
 
     @Autowired
     private ProfileService profileService;
+
+    @Autowired
+    private SocialMediaService socialMediaService;
 
     @ModelAttribute
     public void addHttpServletRequestToModel(HttpServletRequest request, Model model) {
@@ -110,6 +116,7 @@ public class HomeController {
 
         Profile profile = profileService.getProfile(1L).get();
         model.addAttribute("profile", new ProfileDTO(profile));
+        model.addAttribute("socialMedia", socialMediaService.getSocialMedias().stream().map(f -> new SocialMediaDTO(f)).collect(Collectors.toList()));
 
         return "about";
     }
@@ -119,13 +126,12 @@ public class HomeController {
         @RequestParam("fullname") String fullname, 
         @RequestParam("pronouns") String pronouns, 
         @RequestParam("description") String description, 
-        @RequestParam("emailAddress") String emailAddress, 
-        @RequestParam("instagram") String instagram, @RequestParam("phoneNumber") String phoneNumber, 
+ 
         @RequestParam(name = "image", required = false) MultipartFile file, 
         Model model) throws IOException{
 
         Profile original = profileService.getProfile(1L).get();
-        Profile profile = new Profile(fullname, LocalDate.now(), pronouns, description, emailAddress, instagram, phoneNumber, file != null ? file.getBytes() : original.getImage());
+        Profile profile = new Profile(fullname, LocalDate.now(), pronouns, description, "emailAddress", "instagram", "phoneNumber", file != null ? file.getBytes() : original.getImage());
 
         profile.setProfileId(1L);
         profileService.saveOrUpdate(profile);
@@ -156,7 +162,7 @@ public class HomeController {
             switch (extension) {
                 case "heic":
                 case "avif":
-                    // Use external converter (ImageMagick or similar)
+                    
                     File tempInput = File.createTempFile("upload_", "." + extension);
                     File tempOutput = File.createTempFile("converted_", ".jpg");
                     file.transferTo(tempInput);
