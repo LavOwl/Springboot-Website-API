@@ -17,20 +17,22 @@ async function uploadImage(){
             file = await heic2any({ blob: file, toType: "image/png" });
             loader.style.display = "none";
         } catch (e) {
-            alert("No se pudo mostrar tu imagen .HEIC, es posible que sea posible publicarla a pesar de esto, de esto fallar intente usar otra extensión (jpg, png).");
+            alert("No se pudo mostrar tu imagen .HEIC, puede que sea posible publicarla a pesar de esto, de esto fallar intente usar otra extensión (jpg, png).");
             clearImage();
             return;
         }
     }
 
     imgSource = URL.createObjectURL(file);
-    uploadInput.src = imgSource;
+    uploadLabel.style.border = "none";
     uploadLabel.style.backgroundImage = `url(${imgSource})`;
 };
 
 function clearImage(){
+    uploadInput.value = "";
     loader.style.display = "none";
-    uploadData.style.display = "flex";
+    uploadData.style.display = "block";
+    uploadLabel.style.border = "2.5px dashed white";
     uploadLabel.style.backgroundImage = "none";
     
 }

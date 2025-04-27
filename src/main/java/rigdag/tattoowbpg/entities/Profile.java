@@ -33,29 +33,25 @@ public class Profile {
     @Column(name = "description", nullable = false, length = 10240)
     private String description;
 
-    @Column(name = "email_address", nullable=false, length = 255) //SMTP allows for email addresses of up to 254 chars, including @ and domain.
+    /*@Column(name = "email_address", nullable=false, length = 255) //SMTP allows for email addresses of up to 254 chars, including @ and domain.
     private String emailAddress;
 
     @Column(name = "instagram_address", nullable=false, length = 2048)
     private String instagram;
 
     @Column(name = "phone_number", nullable=false, length = 15) //Revisit if it's important to extend length to 20-25 (depends on how we decide to format the data)
-    private String phoneNumber; //Standard storage type for phone numbers is String, as leading zeros can be lost if stored as an integer, and formatting tools like "+" or "-" cannot be used if limited to an int type.
+    private String phoneNumber; //Standard storage type for phone numbers is String, as leading zeros can be lost if stored as an integer, and formatting tools like "+" or "-" cannot be used if limited to an int type.*/
 
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(name="image", columnDefinition = "LONGBLOB")
     private byte[] image;
 
-    public Profile(String fullname, LocalDate birthDate, String pronouns, String description,
-            String emailAddress, String instagram, String phoneNumber, byte[] image) {
+    public Profile(String fullname, LocalDate birthDate, String pronouns, String description, byte[] image) {
         this.fullname = fullname;
         this.birthDate = birthDate;
         this.pronouns = pronouns;
         this.description = description;
-        this.emailAddress = emailAddress;
-        this.instagram = instagram;
-        this.phoneNumber = phoneNumber;
         this.image = image;
     }
 

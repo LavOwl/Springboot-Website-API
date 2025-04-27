@@ -33,7 +33,7 @@ public class StartUp {
     @PostConstruct
     public void init() {
         userService.createUser("admin", "password123");
-        profileService.saveOrUpdate(new Profile("Ivy Daguerre Elgarte", LocalDate.of(2003, 8, 23), "She/Her", "Hi! Sup, it's just me, your friendly local dev <3. This is a placeholder text, please do remove it and put instead whatever you want your clients to know about you! Hopefully this page meets your needs, and helps your startup succeed, lots of love!!", "ide088re@gmail.com", "https://www.instagram.com/ide088/", "+549221303-6980", loadImageAsByteArray("images/UserBlank.png")));
+        profileService.saveOrUpdate(new Profile("Ivy Daguerre Elgarte", LocalDate.of(2003, 8, 23), "She/Her", "Hi! Sup, it's just me, your friendly local dev <3. This is a placeholder text, please do remove it and put instead whatever you want your clients to know about you! Hopefully this page meets your needs, and helps your startup succeed, lots of love!!", loadImageAsByteArray("images/UserBlank.png")));
         socialMediaService.saveOrUpdate(new SocialMedia("Whatsapp", "https://wa.me/5492213036980", loadImageAsByteArray("icons/Social_Media/Whatsapp.png")));
         socialMediaService.saveOrUpdate(new SocialMedia("Telegram", "https://t.me/myusername", loadImageAsByteArray("icons/Social_Media/Telegram.png")));
         socialMediaService.saveOrUpdate(new SocialMedia("Instagram", "https://www.instagram.com/ide088/", loadImageAsByteArray("icons/Social_Media/Instagram.png")));

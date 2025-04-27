@@ -7,22 +7,28 @@
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/reusable.css}">
     <link rel="icon" type="image/x-icon" th:href="@{/icons/tattoo-studio.png}">
+    <link rel="stylesheet" th:href="@{/css/burgerCheckbox.css}">
 </head>
 <body>
-    <div class="topBar"><input class="openMenu" type="checkbox"></div>
+    <div class="topBar">
+        <label class="burger-menu" for="burger">
+            <input id="burger" type="checkbox" hidden>
+            <span></span>
+        </label>
+    </div>
     <nav>
         <ul class="navegationBar">
             <li th:classappend="${httpServletRequest.requestURI == '/' ? 'activeTab' : ''}">
                 <a th:href="@{/}">Inicio</a>
             </li>
             <li th:classappend="${(httpServletRequest.requestURI == '/turnos' || httpServletRequest.requestURI == '/turnosoffline') ? 'activeTab' : ''}">
-                <a th:href="@{/turnos}">Mis turnos</a>
+                <a th:href="@{/turnos}">Turnos</a>
             </li>
             <li th:classappend="${httpServletRequest.requestURI == '/publicaciones' ? 'activeTab' : ''}">
-                <a th:href="@{/publicaciones}">Mis publicaciones</a>
+                <a th:href="@{/publicaciones}">Publicaciones</a>
             </li>
             <li th:classappend="${httpServletRequest.requestURI == '/sobremi' ? 'activeTab' : ''}">
-                <a th:href="@{/sobremi}">Sobre mi</a>
+                <a th:href="@{/sobremi}">Sobre mí</a>
             </li>
         </ul>
     </nav>

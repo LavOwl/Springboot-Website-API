@@ -1,3 +1,7 @@
+:root{
+    --img-height: 18rem;
+}
+
 main{
     display: flex;
     flex-direction: column;
@@ -6,7 +10,8 @@ main{
 
 .uploadForm{
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
     background: linear-gradient(to right,#131314, #343a40);
     border-radius: 20px;
     color: aliceblue;
@@ -15,8 +20,9 @@ main{
 }
 
 .imgAndUploadWrapper{
-    width: 50%;
+    width: fit-content;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     gap: 1.5rem;
 }
@@ -24,7 +30,7 @@ main{
 .uploadLabel{
     position: relative;
     display: flex;
-    height: 18rem;
+    height: var(--img-height);
     aspect-ratio: calc(3/4);
     padding: 0.18rem;
     text-align: center;
@@ -33,7 +39,7 @@ main{
     background: #131314;
     background-size: cover;
     color: white;
-    margin: auto;
+    margin-left: auto;
     margin-top: 8%;
     align-items: center;
     justify-content: center;
@@ -141,7 +147,8 @@ main{
 .texts{
     display: flex;
     flex-direction: column;
-    width: 50%;
+    min-width: 300px;
+    flex: 1 1 300px;
 }
 
 .texts > label{

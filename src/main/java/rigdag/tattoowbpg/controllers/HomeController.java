@@ -126,12 +126,11 @@ public class HomeController {
         @RequestParam("fullname") String fullname, 
         @RequestParam("pronouns") String pronouns, 
         @RequestParam("description") String description, 
- 
         @RequestParam(name = "image", required = false) MultipartFile file, 
         Model model) throws IOException{
 
         Profile original = profileService.getProfile(1L).get();
-        Profile profile = new Profile(fullname, LocalDate.now(), pronouns, description, "emailAddress", "instagram", "phoneNumber", file != null ? file.getBytes() : original.getImage());
+        Profile profile = new Profile(fullname, LocalDate.now(), pronouns, description, file != null ? file.getBytes() : original.getImage());
 
         profile.setProfileId(1L);
         profileService.saveOrUpdate(profile);

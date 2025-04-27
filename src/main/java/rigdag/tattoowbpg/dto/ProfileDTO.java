@@ -18,12 +18,6 @@ public class ProfileDTO {
 
     private String description;
 
-    private String emailAddress;
-
-    private String instagram;
-
-    private String phoneNumber;
-
     private String image;
 
     public ProfileDTO(Profile profile){
@@ -31,9 +25,6 @@ public class ProfileDTO {
         this.age = Period.between(profile.getBirthDate(), LocalDate.now()).getYears();
         this.pronouns = profile.getPronouns();
         this.description = profile.getDescription();
-        this.emailAddress = profile.getEmailAddress();
-        this.instagram = profile.getInstagram();
-        this.phoneNumber = profile.getPhoneNumber();
         this.image = "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(profile.getImage());
     }
 }
